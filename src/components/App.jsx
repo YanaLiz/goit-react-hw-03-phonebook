@@ -1,6 +1,5 @@
-// import { Container } from '@mui/system'
+
 import React, { Component } from 'react'
-// import { Component } from 'react';
 import ContactForm from './Contacts/ContactsForm';
 import ContactList from './Contacts/ContactList';
 import { Filter } from './Contacts/FilterContacts';
@@ -15,6 +14,25 @@ export class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: ''
+  }
+
+  componentDidMount(){
+  const contacts = localStorage.getItem('contacts')
+  const parsedContacts =JSON.parse(contacts)
+  if (parsedContacts) {
+    this.setState({contacts: parsedContacts})
+  }
+  console.log(parsedContacts)
+  
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    console.log('ContactsForm componentDidUpdate')
+    if(this.state.contacts !==prevState.contacts){
+      console.log('оновлені контакти')
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
+    }
+
   }
 
   changeFilter = e => {

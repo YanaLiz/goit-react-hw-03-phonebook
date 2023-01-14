@@ -21,7 +21,7 @@ class ContactForm extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const { name, number } = this.state;
-    const obj = { name: name, number: number, id: nanoid() };
+    const obj = {id: nanoid(), name: name, number: number };
     const { onSubmit, contacts } = this.props;
     onSubmit(obj);
     if (contacts.find(contact => contact.name === name)) {
